@@ -1,11 +1,9 @@
-import React from 'react'
-
 const Landing = () => {
   return (
-    <div className='pt-14'>
-      <p>Landing page</p>
+    <div className=" w-full ml-[18rem] mt-4 bg-background text-text">
+      <h1>landing page</h1>
     </div>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;

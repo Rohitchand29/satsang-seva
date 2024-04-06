@@ -3,21 +3,25 @@ import Navbar from "./components/Navbar/Navbar";
 
 import Landing from "./components/Landing/Landing";
 import { SignUp } from "./pages/signup/Signup";
-import "./output.css"
+import "./output.css";
+import Sildebar from "./components/Sildebar/Sildebar";
 
 function App() {
   return (
-    <>
+    <div>
       {/* <SignIn /> */}
-      <BrowserRouter> 
+      <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          
-          <Route path="/signup" element={<SignUp />} />
-        </Routes> 
+        <div className=" pt-[72px] flex flex-row w-full">
+          <Sildebar />
+          <Routes>
+            <Route path="/" element={<Landing />} />
+
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+        </div>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 
