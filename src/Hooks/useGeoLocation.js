@@ -1,36 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-const useGeoLocation = () => {
+export default function useGeoLocation() {
   const [location, setLocation] = useState(null);
-  const [userIP, setUserIP] = useState(null);
-  const [city, setCity] = useState(null);
-  const [region, setRegion] = useState(null);
+  const [error, setError] = useState(null);
 
-  // Only run on mount and unmount
+  const refresh = () => {
+    setLocation(null);
+    setError(null);
+  };
+
   useEffect(() => {
-    const setValues = json => {
-      setLocation(json);
-      setUserIP(json.ip);
-      setCity(json.city);
-      setRegion(json.region);
-    };
+    if (!navigator.geolocation) {
+      setError('Geolocation is not supported by this browser.');
+      return;
+    }
 
-    fetch("https://ipapi.co/json")
-      .then(data => data.json())
-      .then(json => {
-        setValues(json);
-      })
-      .catch(err => console.log(err));
+    function handleSuccess(position) {
+      const { latitude, longitude } = position.coords;
+      setLocation({ latitude, longitude });
+    }
+
+    function handleError(error) {
+      setError(error.message);
+    }
+
+    navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
   }, []);
 
-  return {
-    location,
-    setLocation,
-    userIP,
-    city,
-    region
-  };
-};
-
-
-export default useGeoLocation
+  return { location, error, refresh };
+}
