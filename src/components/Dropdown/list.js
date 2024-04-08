@@ -1,9 +1,9 @@
 const list = [
   {
-    city: "English",
+    language: "English",
   },
   {
-    city: "Hindi",
+    language: "Hindi",
   },
 ];
 
