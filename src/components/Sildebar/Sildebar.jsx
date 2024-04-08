@@ -35,6 +35,7 @@ const Sildebar = () => {
           {routes.map((value, index) => {
             return (
               <a
+                key={index}
                 href={value.route}
                 className=" rounded hover:shadow hover:duration-300 duration-300 cursor-pointer hover:bg-accent py-2 px-2"
               >

@@ -1,6 +1,23 @@
 import { CiSearch } from "react-icons/ci";
+import Dropdown from "../Dropdown/Dropdown";
+import { useGeoLocation } from "../../Hooks";
 
 const Navbar = () => {
+  const {
+    location,
+    setLocation,
+    userIP,
+    city,
+    region
+  } = useGeoLocation();
+  console.log({
+    location,
+    setLocation,
+    userIP,
+    city,
+    region
+  })
+  console.log(location)
   return (
     <div>
       <nav className="bg-secondary  text-text w-full py-4 px-8 z-10 fixed ">
@@ -9,8 +26,8 @@ const Navbar = () => {
             BrandName{" "}
           </li>
           <div className=" flex justify-between items-center gap-4">
-            <button className="ml-20 font-serif">Language</button>
-            <button className="ml-20">
+            <Dropdown />
+            <button className=" ml-20">
               <div className="flex bg-white justify-center items-center rounded-md text-black px-2">
                 <input
                   type="search"
@@ -21,8 +38,16 @@ const Navbar = () => {
               </div>
             </button>
 
-            <button className="ml-20 font-serif">Location</button>
-            <button className="ml-20 font-serif">Login</button>
+            <button onClick={
+              ()=>{
+
+              }
+            } className="rounded hover:shadow hover:duration-300 duration-300 cursor-pointer hover:bg-accent ml-20 font-serif">
+              Location
+            </button>
+            <button className="rounded hover:shadow hover:duration-300 duration-300 cursor-pointer hover:bg-accent ml-20 font-serif">
+              Login
+            </button>
           </div>
         </ul>
       </nav>
