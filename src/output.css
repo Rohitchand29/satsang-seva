@@ -8,6 +8,9 @@
 */
 
 *,
+
+
+
 ::before,
 ::after {
   box-sizing: border-box;
@@ -800,6 +803,10 @@ video {
   text-align: center;
 }
 
+.text-start {
+  text-align: start;
+}
+
 .font-serif {
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
@@ -903,6 +910,14 @@ video {
 }
 
 .hover\:duration-300:hover {
+  transition-duration: 300ms;
+}
+
+.focus\:text-start:focus {
+  text-align: start;
+}
+
+.focus\:duration-300:focus {
   transition-duration: 300ms;
 }
 
