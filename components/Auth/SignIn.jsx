@@ -9,7 +9,6 @@ export default function SignIn() {
   const [otp, setOtp] = useState("")
   const [confirmationResult, setConfirmationResult] = useState(null)
   const [otpSent, setOtpSent] = useState(false);
-
   const auth = getAuth(app);
   const router = useRouter();
 
