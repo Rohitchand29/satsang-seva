@@ -1,28 +1,45 @@
-'use client'
-import SignIn from "@/components/Auth/SignIn"
-import { getAuth, onAuthStateChanged } from "firebase/auth"
-import { app } from "@/firebase-config"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import SearchBar from "@/components/SearchBar/SearchBar";
+import { Card, CardContent } from "@/components/ui/card"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import Image from "next/image";
 
-const Page = () => {
 
-  const router = useRouter();
-  const auth = getAuth(app);
-
-  useEffect(()=>{
-    onAuthStateChanged(auth, (user) => {
-      if(user){
-        router.push('/dashboard');
-      }
-    })
-  }, [auth, router])
-
+export default function Home() {
   return (
-    <div className='ml-60'>
-      Landing Page
-    </div>
-  )
-}
+    <div>
+      <SearchBar />
 
-export default Page
+      <Carousel opts={{
+        align: "start",
+        loop: true,
+      }} className="w-full border-white">
+        <CarouselContent className="border-white">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <CarouselItem key={index}>
+              <div className="">
+                <Card>
+                  <CardContent className="flex items-center justify-center p-6">
+                    <Image
+                      height="460"
+                      width="1239"
+                      alt="banner"
+                      src={`/assets/homePageCarosel/${index + 1}.png`}
+                    />
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        
+      </Carousel>
+
+    </div>
+  );
+}

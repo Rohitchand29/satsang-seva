@@ -1,68 +1,41 @@
-'use client'
-import { IoLanguage } from "react-icons/io5";
-import { CiLocationOn } from "react-icons/ci";
-import {
-  Popover,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import Link from 'next/link';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { useGeoLocation } from '@/hooks';
-import LocationPopOver from "./LocationPopOver";
-
-
+import Link from 'next/link'
+import React from 'react'
+import "@/app/globals.css"
+import { Button } from '../ui/button'
 
 const Navbar = () => {
-
-  const geoLocation = useGeoLocation();
-
-
+  const NAVBAR_LINKS = [
+    {
+      label: 'Trending',
+      url: '/'
+    },
+    {
+      label: 'Sports',
+      url: '/'
+    },
+    {
+      label: 'Concerts',
+      url: '/'
+    },
+    {
+      label: 'Theater',
+      url: '/'
+    }
+  ]
   return (
-    <div className=' z-10 fixed top-0 w-full bg-background h-20 flex items-center px-8 justify-between border-b-2 border-primary '>
-      <div className='text-3xl font-bold text-primary'>
+    <div className='flex justify-between px-[100px] bg-black text-white items-center py-[25px]'>
+      <div>
         Brand Name
       </div>
-      <div className='flex items-center gap-6'>
-        <div>
-          <Input className=" w-80 " placeholder="Search" />
+      <div className='poppins-medium flex gap-5 items-center' >
+        <div className='flex gap-3'>
+          {NAVBAR_LINKS.map((link, index) => (
+            <Link key={index} href={link.url}>{link.label}</Link>
+          ))}
         </div>
-        <div>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="outline" className="flex gap-1"><p>Location</p><CiLocationOn />
-              </Button>
-            </PopoverTrigger>
-            <LocationPopOver />
-          </Popover>
-        </div>
-        <div>
-          <Button asChild>
-            <Link href="/login">LogIn</Link>
-          </Button>
-        </div>
-        <div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" >
-                <IoLanguage />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuLabel>Language</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Hindi</DropdownMenuItem>
-              <DropdownMenuItem>English</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+        <div className='flex gap-3'>
+          <Button className="bg-clr_primary rounded-full px-5 h-[33px]">Sign Up</Button>
+          <Button className="bg-clr_primary rounded-full px-5 h-[33px]">Log In</Button>
         </div>
       </div>
     </div>
