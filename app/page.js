@@ -1,4 +1,5 @@
 import SearchBar from "@/components/SearchBar/SearchBar";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
@@ -26,6 +27,7 @@ export default function Home() {
                 <Card>
                   <CardContent className="flex items-center justify-center p-6">
                     <Image
+                      priority
                       height="460"
                       width="1239"
                       alt="banner"
@@ -37,7 +39,7 @@ export default function Home() {
             </CarouselItem>
           ))}
         </CarouselContent>
-        
+
       </Carousel>
 
     </div>
