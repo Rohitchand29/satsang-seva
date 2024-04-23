@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const LoginComponent = () => {
+  const [user, setUser] = useState(null)
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [confirmationResult, setConfirmationResult] = useState(null);
@@ -16,13 +17,24 @@ const LoginComponent = () => {
 
   useEffect(()=>{
     window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-      'size': "normal",
+      'size': "small",
       'callback': (response) => {
       },
       'expired-callback': () => {
       }
     })
   }, [auth])
+
+  useEffect(()=>{
+    const unsubscribe = auth.onAuthStateChanged((user)=>{
+      if (user){
+        setUser(user)
+      } else {
+        setUser(null)
+      }
+    })
+    return () => unsubscribe()
+  },[])
 
   const handlePhoneNumberChange = (e) => {
     setPhoneNumber(e.target.value);
@@ -36,7 +48,6 @@ const LoginComponent = () => {
       const confirmation = await signInWithPhoneNumber(auth, formattedPhoneNumber, window.recaptchaVerifier)
       setConfirmationResult(confirmation);
       setOtpSent(true);
-      setPhoneNumber('')
       alert("OTP sent successfully")
     } catch (error) {
       console.log(error.message)
@@ -53,6 +64,7 @@ const LoginComponent = () => {
     }
   }
   return (
+    (!user)?
     <div>
       {
         !otpSent ? (
@@ -84,7 +96,7 @@ const LoginComponent = () => {
           otpSent? 'Submit' : 'Send OTP'
         }
       </button>
-    </div>
+    </div>:<p>user exists</p>
   )
 }
 

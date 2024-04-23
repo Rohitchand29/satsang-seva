@@ -13,6 +13,7 @@ const GoogleProvider = () => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user)
+        console.log(user)
       } else {
         setUser(null)
       }
@@ -31,7 +32,7 @@ const GoogleProvider = () => {
     }
   }
   return (
-    <div className='flex flex-col items-center justify-center h-screen'>
+    <div className='flex flex-col items-center justify-center '>
       {
         user? (
           <p>User exists</p>

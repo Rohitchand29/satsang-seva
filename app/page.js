@@ -39,7 +39,7 @@ export default function Home() {
             </CarouselItem>
           ))}
         </CarouselContent>
-
+        
       </Carousel>
 
     </div>
