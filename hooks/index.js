@@ -1,5 +1,5 @@
-import useGeoLocation from "./useGeoLocation";
+import useFirebaseAuth from "./useFirebaseAuth";
 
 export {
-  useGeoLocation
+  useFirebaseAuth
 }
