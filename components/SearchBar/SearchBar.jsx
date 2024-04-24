@@ -13,7 +13,7 @@ const SearchBar = () => {
             <input className="w-full outline-0 border-0 outline-none" type="text" placeholder="Search by Event,  Artist, Venue... " />
           </div>
           <div className=' border-2 p-4 py-1 rounded-full shadow-lg  w-full flex items-center gap-2'>
-            <Image src="/assets/icons/map-pin.png" width="26" height="26" alt="search icon" />
+            <Image src="/assets/icons/map-pin.svg" width="26" height="26" alt="search icon" />
             <input className="w-full outline-0 border-0 outline-none" type="text" placeholder="Zip code or State" />
           </div>
           <Button variant="ghost" className=" w-[200px] rounded-full text-gray-400" asChild>

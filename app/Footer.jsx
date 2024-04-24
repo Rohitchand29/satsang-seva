@@ -17,9 +17,8 @@ const Footer = () => {
           <div className="left-0 top-[3px] absolute text-slate-100 text-xs font-bold  leading-10">Home<br />About Us<br />Blog<br />Trending Events<br />Categories</div>
         </div>
       </div>
-      <div className="w-[1440px] h-7 left-[4px] top-[338px] absolute">
-        <div className="w-[1440px] h-7 left-0 top-0 absolute bg-orange-500" />
-        <div className="left-[656px] top-0 absolute text-center text-slate-100 text-xs   leading-7">© 2024 Satsang Seva</div>
+      <div className="w-full left-0 h-7 top-[338px] absolute">
+        <p className='w-full bg-orange-5400'>© 2024 Satsang Seva</p>
       </div>
       <div className="w-[364px] h-[174.79px] left-[980px] top-[70px] absolute">
         <div className="w-[364px] left-0 top-[33px] absolute text-center text-zinc-100 text-sm   leading-snug">Join our mailing list to stay in the loop with our newest for Events</div>

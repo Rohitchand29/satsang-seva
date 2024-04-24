@@ -21,18 +21,30 @@ import Login from '../Auth/Login/Login'
 import { useRouter } from 'next/navigation'
 import { getAuth, signOut } from 'firebase/auth'
 import { app } from '@/firebase-config'
+import axios from 'axios'
 
 const Navbar = () => {
+
+
   const [user, setUser] = useState(null)
   const router = useRouter();
-    const auth = getAuth(app)
+  const auth = getAuth(app)
 
+  const registerUser = async (payload) => {
+    const response = await axios.post("/api/v1/user/create-user", payload)
+
+  }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user)
-        console.log(user)
+        const payload = {
+          email: user.email,
+          phone: user.phoneNumber,
+          uid: user.uid
+        }
+        registerUser(payload);
       } else {
         setUser(null)
       }
@@ -47,7 +59,6 @@ const Navbar = () => {
       console.error(err)
     }
   }
-  console.log(user)
   const NAVBAR_LINKS = [
     {
       label: 'Trending',
@@ -70,6 +81,7 @@ const Navbar = () => {
     <div className='flex justify-between px-[100px] bg-black text-white items-center py-[25px]'>
       <div className='flex justify-between gap-2 items-center'>
         <Image
+          priority
           src="/assets/logo.png"
           width="30"
           height="30"
@@ -86,18 +98,18 @@ const Navbar = () => {
         <div className='flex gap-3'>
           <Button className="bg-clr_primary rounded-full px-5 h-[33px]">Sign Up</Button>
           {
-            (!user)?
-            <Popover>
-              <Button className="bg-clr_primary rounded-full px-5 h-[33px]" asChild>
-                <PopoverTrigger>
-                  Log In
-                </PopoverTrigger>
-              </Button>
-              <PopoverContent className="p-0">
-                <Login />
-              </PopoverContent>
-            </Popover>:
-            <Button className="bg-clr_primary rounded-full px-5 h-[33px]" onClick={handleLogout}>Log Out</Button>
+            (!user) ?
+              <Popover>
+                <Button className="bg-clr_primary rounded-full px-5 h-[33px]" asChild>
+                  <PopoverTrigger>
+                    Log In
+                  </PopoverTrigger>
+                </Button>
+                <PopoverContent className="p-0">
+                  <Login />
+                </PopoverContent>
+              </Popover> :
+              <Button className="bg-clr_primary rounded-full px-5 h-[33px]" onClick={handleLogout}>Log Out</Button>
           }
         </div>
       </div>
