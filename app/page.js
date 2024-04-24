@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/carousel"
 import Image from "next/image";
 import EventCard from "@/components/EventCard/EventCard";
-import Footer from "./footer";
+import Footer from "./Footer";
 import useGeolocation from "@/hooks/useGeolocation";
 import { useEffect, useState } from "react";
 import axios from "axios";
