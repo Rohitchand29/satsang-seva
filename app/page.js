@@ -23,7 +23,6 @@ import axios from "axios";
 
 export default function Home() {
   const location = useGeolocation();
-  console.log(location)
 
   const categoryData = [
     {
@@ -73,7 +72,7 @@ export default function Home() {
       })
       const data = await response.data;
       setNearEvents(data.data);
-      console.log(data);
+      // console.log(data);
   }
   useEffect(()=>{
     getNearEvents();

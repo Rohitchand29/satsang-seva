@@ -13,7 +13,7 @@ const GoogleProvider = () => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user)
-        console.log(user)
+        // console.log(user)
       } else {
         setUser(null)
       }

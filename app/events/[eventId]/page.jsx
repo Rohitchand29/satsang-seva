@@ -12,7 +12,7 @@ const Page = ({ params }) => {
   const fetchEvent = async () => {
     const response = await axios.post("/api/v1/event/get-event-by-id", { eventId: params.eventId })
     const data = await response.data;
-    console.log(data.data)
+    // console.log(data.data)
     setEvent(data.data)
   }
 
