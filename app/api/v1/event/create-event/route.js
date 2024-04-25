@@ -3,18 +3,19 @@ const { EVENT } = require("@/db/models/eventModel");
 
 
 
-export async function GET() {
+export async function POST(request) {
   try {
     await connectDB();
+    const data = await request.json();
     const newEvent = new EVENT({
-      title: "hgasdhjfg",
-      description: "ranbhngvadfshjgdom 234q",
-      date: new Date('2024-04-30T16:00:00Z'), // Adjust date accordingly 
-      image: "/assets/categoryImages/4.png",
-      location_name: "narela",
+      title: data.event.eventName,
+      description: data.event.description,
+      date: new Date(data.event.date), // Adjust date accordingly 
+      image: data.event.image || "/assets/categoryImages/4.png",
+      location_name: data.event.location_name,
       location: {
         type: 'Point',
-        coordinates: [77.0890159, 28.8551058]
+        coordinates: [data.event.lon, data.event.lat]
       },
       peopleAttending: [] // Initially, no attendees
     });
