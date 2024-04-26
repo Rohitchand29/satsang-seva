@@ -9,16 +9,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import Login from '../Auth/Login/Login'
-import { useRouter } from 'next/navigation'
 import { getAuth, signOut } from 'firebase/auth'
 import { app } from '@/firebase-config'
 import axios from 'axios'
@@ -27,7 +18,6 @@ const Navbar = () => {
 
 
   const [user, setUser] = useState(null)
-  const router = useRouter();
   const auth = getAuth(app)
 
   const registerUser = async (payload) => {
@@ -80,14 +70,21 @@ const Navbar = () => {
   return (
     <div className='flex justify-between px-[100px] bg-black text-white items-center py-[25px]'>
       <div className='flex justify-between gap-2 items-center'>
-        <Image
+        {/* <Image
           priority
           src="/assets/logo.png"
           width="30"
           height="30"
           alt="logo"
         />
-        <p className='poppins-bold text-2xl'>Satsang Seva</p>
+        <p className='poppins-bold text-2xl'>Satsang Seva</p> */}
+        <Image
+          priority
+          src="/assets/misc/logo.svg"
+          width={247}
+          height={47}
+          alt='logo'
+        />
       </div>
       <div className='poppins-medium flex gap-5 items-center' >
         <div className='flex gap-3'>
