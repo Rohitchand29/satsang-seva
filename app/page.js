@@ -72,7 +72,7 @@ export default function Home() {
       })
       const data = await response.data;
       setNearEvents(data.data);
-      // console.log(data);
+      console.log(data);
   }
   useEffect(()=>{
     getNearEvents();
@@ -151,7 +151,7 @@ export default function Home() {
           {
             nearEvents?.map((pick, index) => {
               return (
-                <EventCard key={index} title={pick.title} location={pick.location.coordinates} date={pick.date} img={pick.image} calculatedDistance={Math.floor(pick.calculatedDistance/1000)} _id={pick._id} attendies={pick.peopleAttending.length} location_name={pick.location_name} />
+                <EventCard key={index} title={pick.title} location={pick.location.coordinates} start={pick.start} end={pick.end} img={pick.image} calculatedDistance={Math.floor(pick.calculatedDistance/1000)} _id={pick._id} attendies={pick.peopleAttending.length} location_name={pick.location_name} location_url={pick.location_url} host_name={pick.host_name} event_type={pick.event_type} event_performer={pick.event_performer} />
               )
             })
           }
