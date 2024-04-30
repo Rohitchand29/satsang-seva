@@ -8,17 +8,6 @@ import axios from 'axios'
 const SearchBar = () => {
   const [artist, setArtist] = useState("")
 
-  const fetchSuggestions = async () => {
-    const response = await axios.post("/api/v1/event/get-events-filters", {
-      artist: artist
-    })
-    const data = await response.data;
-    console.log(data)
-  }
-
-  useEffect(()=>{
-    fetchSuggestions()
-  }, [artist])
   return (
     <div className='px-[100px] pb-[25px] bg-black'>
       <div className='flex gap-7 rounded-md bg-white justify-between p-[25px]'>
