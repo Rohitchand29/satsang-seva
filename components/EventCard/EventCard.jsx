@@ -7,11 +7,13 @@ import { useToast } from '../ui/use-toast';
 import axios from 'axios';
 import { app } from '@/firebase-config';
 import { getAuth } from 'firebase/auth';
+import timeDurationWithFormat from '@/utils/timeCalculator';
 
 const EventCard = (props) => {
   const auth = getAuth(app)
   const [_attendies, setAttendies] = useState(props.attendies)
   const [user, setUser] = useState(null)
+  const duration = timeDurationWithFormat(props.start,props.end)
   const { toast } = useToast()
 
   const like = async () => {
@@ -75,7 +77,7 @@ const EventCard = (props) => {
               <p className='text-sm'>({props.calculatedDistance} km)</p>
             </div>
           </div>
-          <p>{dateFormatter(props.date)}</p>
+          <p>{dateFormatter(props.start.split("t")[0], duration)}</p>
           <div className=' w-fit gap-2 text-clr_primary flex items-center justify-between border-[2px] border-clr_primary z-0 rounded-[10px]'>
             <div className='absolute z-10 border-2 p-1 px-[6px] border-clr_primary rounded-[9px]'>
               <Image src="/assets/icons/thumb.svg" width={14} height={14} alt="" />

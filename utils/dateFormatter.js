@@ -1,4 +1,4 @@
-const dateFormatter = (_date) => {
+const dateFormatter = (_date, duration) => {
   const date = new Date(_date)
   const months = [
     "Jan",
@@ -38,7 +38,7 @@ const dateFormatter = (_date) => {
   const remainingMinutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
   const remainingTimeString = `${(remainingDays > 0) ? remainingDays + "d" : ""} ${(remainingHours > 0) ? remainingHours + "h" : ""} ${remainingMinutes}m`;
 
-  const newDateString = `${month} • ${date.getDate()} • ${day} • ${time} • ${remainingTimeString}`
+  const newDateString = `${month} ${date.getDate()} • ${day} • ${time} • ${duration}`
   return newDateString;
 }
 
