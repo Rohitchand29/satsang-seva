@@ -7,6 +7,7 @@ export async function POST(request) {
   try {
     await connectDB();
     const data = await request.json();
+    
     const newEvent = new EVENT({
       title: data.event.eventName,
       description: data.event.description,
@@ -17,6 +18,7 @@ export async function POST(request) {
         type: 'Point',
         coordinates: [data.event.lon, data.event.lat]
       },
+      artist: data.event.artist,
       peopleAttending: [] // Initially, no attendees
     });
     await newEvent.save();

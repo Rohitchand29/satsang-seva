@@ -6,10 +6,10 @@ import { EVENT } from "@/db/models/eventModel";
 export async function POST( request ) {
   try {
     await connectDB();
-    const query = await request.json();
-    console.log(query);
+    const { artist } = await request.json();
+    const regex = new RegExp(artist, 'g');
 
-    const events = await EVENT.find(query);
+    const events = await EVENT.find({ artist: regex });
     console.log(events);
     return Response.json({
       success: true,
