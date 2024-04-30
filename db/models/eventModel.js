@@ -41,7 +41,10 @@ const eventSchema = new mongoose.Schema({
     peopleAttending: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
-    }]
+    }],
+    artist: {
+        type: String,
+    }
 });
 
 // Create 2dsphere index for geospatial searches

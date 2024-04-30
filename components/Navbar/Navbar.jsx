@@ -51,33 +51,22 @@ const Navbar = () => {
   }
   const NAVBAR_LINKS = [
     {
-      label: 'Trending',
+      label: 'Upcoming Events',
       url: '/'
     },
     {
-      label: 'Sports',
+      label: 'List your event',
       url: '/'
     },
     {
-      label: 'Concerts',
-      url: '/'
-    },
-    {
-      label: 'Theater',
+      label: 'Categories',
       url: '/'
     }
   ]
   return (
     <div className='flex justify-between px-[100px] bg-black text-white items-center py-[25px]'>
       <div className='flex justify-between gap-2 items-center'>
-        {/* <Image
-          priority
-          src="/assets/logo.png"
-          width="30"
-          height="30"
-          alt="logo"
-        />
-        <p className='poppins-bold text-2xl'>Satsang Seva</p> */}
+      
         <Image
           priority
           src="/assets/misc/logo.svg"
@@ -93,7 +82,6 @@ const Navbar = () => {
           ))}
         </div>
         <div className='flex gap-3'>
-          <Button className="bg-clr_primary rounded-full px-5 h-[33px]">Sign Up</Button>
           {
             (!user) ?
               <Popover>
