@@ -1,15 +1,15 @@
 import connectDB from "@/db/connect/connector";
-import { EVENT } from "@/db/models/eventModel";
+import { EVENT_NEW } from "@/db/models/newEventModel";
 
 
 
-export async function POST( request ) {
+export async function POST(request) {
   try {
     await connectDB();
     const query = await request.json();
 
-    const events = await EVENT.find( query );
-    console.log(events);
+    const events = await EVENT_NEW.find(query);
+    
     return Response.json({
       success: true,
       data: events,

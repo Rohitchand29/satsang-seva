@@ -1,5 +1,5 @@
 import connectDB from "@/db/connect/connector";
-import { EVENT } from "@/db/models/eventModel";
+import { EVENT_NEW } from "@/db/models/newEventModel";
 import mongoose from "mongoose";
 
 
@@ -7,40 +7,49 @@ import mongoose from "mongoose";
 export async function POST(request) {
   try {
     await connectDB();
-    const { eventId, lat, lon } = await request.json();
-    // console.log(eventId, lat, lon);
-    if (!lat || !lon) return Response.json({})
-    const event = await EVENT.aggregate([
-      {
-          $geoNear: {
-              near: { type: "Point", coordinates: [lon, lat] },
-              distanceField: "calculatedDistance",
-              spherical: true 
-          }
-      },
-      { 
-          $match: {
-              _id: new mongoose.Types.ObjectId(eventId)
-          }
-      },
-  ])
+    const { event_id, lat, lon } = await request.json();
 
+    if (!lat || !lon) {
+      return Response.json({
+        success: false,
+        error: "Please provide lat and lon",
+        message: "Please provide lat and lon"
+      })
+    }
+
+    const event = await EVENT_NEW.aggregate([
+      {
+        $geoNear: {
+          near: { type: "Point", coordinates: [lon, lat] },
+          distanceField: "calculatedDistance",
+          spherical: true
+        }
+      },
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(event_id)
+        }
+      }
+    ])
+    console.log(event)
     if (!event) {
       return Response.json({
         success: false,
-        data: null,
+        data: [],
+        error: "Event not found"
       })
     }
     return Response.json({
       success: true,
       data: event[0],
+      message: "Event fetched!"
     })
   } catch (err) {
-    console.error(err)
+    console.log(err);
     return Response.json({
       success: false,
       data: null,
-      error: err.message,
+      error: err.message
     })
   }
 }
