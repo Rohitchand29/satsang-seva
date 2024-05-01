@@ -1,12 +1,12 @@
 import connectDB from "@/db/connect/connector";
-import { EVENT } from "@/db/models/eventModel";
+import { EVENT_NEW } from "@/db/models/newEventModel";
 import { USER } from "@/db/models/userModel";
 
 export async function POST(request) {
   try {
     await connectDB();
     const { event_id, user_uid } = await request.json();
-    const event = await EVENT.findOne({ _id: event_id });
+    const event = await EVENT_NEW.findOne({ _id: event_id });
     const user = await USER.findOne({ firebase_uid: user_uid });
     if (!event || !user) {
       return Response.json({

@@ -4,6 +4,7 @@ import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth
 import {app} from "@/firebase-config"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "@/components/ui/use-toast";
 
 const LoginComponent = () => {
   const [user, setUser] = useState(null)
@@ -49,6 +50,9 @@ const LoginComponent = () => {
       setConfirmationResult(confirmation);
       setOtpSent(true);
       alert("OTP sent successfully")
+      toast({
+        title: "Otp sent successfully"
+      })
     } catch (error) {
       console.log(error.message)
     }
@@ -64,8 +68,9 @@ const LoginComponent = () => {
     }
   }
   return (
-    (!user)?
-    <div>
+    (!user)?<>
+    <p className="text-sm">Sign in with phone number</p>
+    <div className="w-full flex flex-col gap-2">
       {
         !otpSent ? (
           <div id="recaptcha-container"></div>
@@ -76,18 +81,18 @@ const LoginComponent = () => {
         value={phoneNumber}
         onChange={handlePhoneNumberChange}
         placeholder="enter phone number"
-        className="border border-gray-500 p-2 rounded-md"
+        className="border border-gray-500 p-2 rounded-md w-full"
       />
       <input
         type="text"
         value={otp}
         onChange={handleOtpChange}
         placeholder="enter otp"
-        className="border border-gray-500 p-2 rounded-md"
+        className={`border border-gray-500 p-2 rounded-md w-full ${otpSent?"box": "hidden"}`}
       />
       <button
         onClick={otpSent?handleOTPSubmit:handleSendOtp}
-        className={`bg-${otpSent ? 'green': 'blue'}-500 text-white p-2 rounded-md m-2`}
+        className={`bg-${otpSent ? 'green': 'blue'}-500 text-white p-2 rounded-md mt-2 w-full`}
         style={{
           backgroundColor: otpSent ? 'green': 'blue'
         }}
@@ -96,7 +101,8 @@ const LoginComponent = () => {
           otpSent? 'Submit' : 'Send OTP'
         }
       </button>
-    </div>:<p>user exists</p>
+    </div>
+    </>:<p>user exists</p>
   )
 }
 

@@ -5,9 +5,11 @@ import { toast } from '@/components/ui/use-toast'
 import { app } from '@/firebase-config'
 import useGeolocation from '@/hooks/useGeolocation'
 import dateFormatter from '@/utils/dateFormatter'
+import timeDurationWithFormat from '@/utils/timeCalculator'
 import axios from 'axios'
 import { getAuth } from 'firebase/auth'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 
@@ -52,9 +54,9 @@ const Page = ({ params }) => {
   const location = useGeolocation();
 
   const fetchEvent = async () => {
-    const response = await axios.post("/api/v1/event/get-event-by-id", { eventId: params.eventId, lat: location.coordinates.lat, lon: location.coordinates.lng })
+    const response = await axios.post("/api/v1/event/get-event-by-id", { event_id: params.eventId, lat: location.coordinates.lat, lon: location.coordinates.lng })
     const data = await response.data;
-    console.log(data.data)
+    
     setEvent(data.data)
     setAttendies(data?.data?.peopleAttending?.length)
   }
@@ -106,7 +108,7 @@ const Page = ({ params }) => {
             </div>
             <div className='flex justify-between items-center'>
               <div className='flex gap-4 items-center'>
-                <p className=' font-semibold text-3xl'>{event.title}</p>
+                <p className=' font-semibold text-3xl'>{event.title} by ({event.event_performer})</p>
                 <div className='border-2 p-[5px] border-clr_primary select-none cursor-pointer rounded-md w-[34px] h-[34px]' onClick={like} >
                   <Image className=' select-none' src="/assets/icons/thumb.svg" width={24} height={24} alt="" />
                 </div>
@@ -132,7 +134,7 @@ const Page = ({ params }) => {
               </div>
             </div>
             <div className='font-semibold'>
-              {dateFormatter(event.date)}
+              {dateFormatter(event?.start?.split("T")[0], timeDurationWithFormat(event.start,event.end))}
             </div>
             <div className='flex gap-2 items-center '>
               <Image
@@ -150,9 +152,9 @@ const Page = ({ params }) => {
             </div>
             <div className='w-full border-b-2'></div>
             <div>
-              <p>Location of the event</p>
+              <Link href={event?.location_url || "/"}>Location of the event</Link>
             </div>
-          </div> : null
+          </div> : <></>
       }
 
     </div>

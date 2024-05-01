@@ -13,6 +13,9 @@ import Login from '../Auth/Login/Login'
 import { getAuth, signOut } from 'firebase/auth'
 import { app } from '@/firebase-config'
 import axios from 'axios'
+import { PopoverClose } from '@radix-ui/react-popover'
+import { Dialog, DialogTitle, DialogTrigger } from '../ui/dialog'
+import { DialogContent } from '@radix-ui/react-dialog'
 
 const Navbar = () => {
 
@@ -66,7 +69,7 @@ const Navbar = () => {
   return (
     <div className='flex justify-between px-[100px] bg-black text-white items-center py-[25px]'>
       <div className='flex justify-between gap-2 items-center'>
-      
+
         <Image
           priority
           src="/assets/misc/logo.svg"
@@ -84,16 +87,27 @@ const Navbar = () => {
         <div className='flex gap-3'>
           {
             (!user) ?
-              <Popover>
+              // <Popover>
+              //   <Button className="bg-clr_primary rounded-full px-5 h-[33px]" asChild>
+              //     <PopoverTrigger>
+              //       Log In
+              //     </PopoverTrigger>
+              //   </Button>
+              //   <PopoverContent className="p-0 me-28">
+              //     <Login />
+              //   </PopoverContent>
+              // </Popover> :
+              // <Button className="bg-clr_primary rounded-full px-5 h-[33px]" onClick={handleLogout}>Log Out</Button>
+              <Dialog>
                 <Button className="bg-clr_primary rounded-full px-5 h-[33px]" asChild>
-                  <PopoverTrigger>
+                  <DialogTrigger>
                     Log In
-                  </PopoverTrigger>
+                  </DialogTrigger>
                 </Button>
-                <PopoverContent className="p-0">
+                <DialogContent className=' absolute z-10 w-72 translate-x-[-50%] top-[5%] left-[50%]'>
                   <Login />
-                </PopoverContent>
-              </Popover> :
+                </DialogContent>
+              </Dialog>:
               <Button className="bg-clr_primary rounded-full px-5 h-[33px]" onClick={handleLogout}>Log Out</Button>
           }
         </div>

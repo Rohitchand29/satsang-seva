@@ -62,7 +62,7 @@ const EventCard = (props) => {
         <Image src={props.img} width={133} height={133} quality={100} className='w-[133px] h-[133px]' alt="" />
         <div className='flex gap-2 flex-col'>
           <div className='flex items-center gap-4'>
-            <Link href={"/events/" + props._id}><p className='font-bold text-2xl'>{props.title}</p></Link>
+            <Link href={"/events/" + props._id}><p className='font-bold text-2xl'>{props.title} by {props.event_performer}</p></Link>
             <div className='p-1 border-2 border-clr_primary rounded-md cursor-pointer'>
               <Image src="/assets/icons/thumb.svg" width={14} height={14} alt="" onClick={like} />
             </div>
