@@ -1,7 +1,7 @@
 
 const timeDurationWithFormat = (start, end) => {
   const diff = new Date(end)- new Date(start);
-  console.log(diff, end, start)
+  
   return formatRemainingTime({
     timeRemaining: Math.floor(diff/(1000*60))
   })

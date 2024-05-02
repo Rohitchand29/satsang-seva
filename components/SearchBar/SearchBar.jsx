@@ -18,12 +18,18 @@ import { Input } from '../ui/input'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../ui/command'
 import allStates from '@/constants/states'
 import allCity from '@/constants/city'
+import Link from 'next/link'
 
 
 
 
 const SearchBar = () => {
   const [artist, setArtist] = useState("")
+  const [event, setEvent] = useState("")
+  const [zipCode, setZipCode] = useState("")
+  const [date, setDate] = useState("")
+
+
   const today = new Date(new Date().toISOString().split('T')[0])
   const yesterday = new Date(today - 24 * 60 * 60 * 1000)
 
@@ -33,25 +39,36 @@ const SearchBar = () => {
   const [openCity, setOpenCity] = useState(false)
   const [valueCity, setValueCity] = useState("")
 
+  const [link, setLink] = useState("")
 
-  const [date, setDate] = useState("")
+  useEffect(()=> {
+    const tmp = new Array()
+
+    if (artist) tmp.push({"artist": artist})
+    if (event) tmp.push({"event": event})
+    if (valueCity) tmp.push({"city": valueCity})
+    if (valueState) tmp.push({"state": valueState})
+    if (zipCode) tmp.push({"zipCode": zipCode})
+    if (date) tmp.push({"date": (new Date((new Date(date)).getTime()+24*60*60*1000)).toISOString().split("T")[0]})
+    var _link = "?"
+  
+    for (var i = 0; i < tmp.length; i++) {
+      _link += Object.keys(tmp[i])[0] + "=" + tmp[i][Object.keys(tmp[i])[0]] + "&"
+    }
+    _link = _link.slice(0,_link.length - 1)
+    setLink(_link)
+
+  }, [artist,event, valueCity, valueState, zipCode, date])
+
   return (
     <div className='px-[100px] pb-[25px] bg-black'>
       <div className='flex gap-7 rounded-md bg-white justify-between p-[25px]'>
         <div className='flex w-full gap-5'>
-          {/* <div className=' border-2 p-4 py-1 rounded-full shadow-lg  w-full flex items-center gap-2'>
-            <Image src="/assets/icons/search.png" width="26" height="26" alt="search icon" />
-            <input value={artist} onChange={(e) => setArtist(e.target.value)} className="w-full outline-0 border-0 outline-none" type="text" placeholder="Search by Event,  Artist, Venue... " />
-          </div>
-          <div className=' border-2 p-4 py-1 rounded-full shadow-lg  w-full flex items-center gap-2'>
-            <Image src="/assets/icons/map-pin.svg" width="26" height="26" alt="search icon" />
-            <input className="w-full outline-0 border-0 outline-none" type="text" placeholder="Zip code or State" />
-          </div> */}
           <div>
-            <Input type="text" placeholder="Artist" />
+            <Input type="text" placeholder="Artist" value={artist} onChange={(e)=>setArtist(e.target.value)} />
           </div>
           <div>
-            <Input type="text" placeholder="Event" />
+            <Input type="text" placeholder="Event" value={event} onChange={(e)=>setEvent(e.target.value)} />
           </div>
           <div>
 
@@ -116,7 +133,7 @@ const SearchBar = () => {
               </PopoverTrigger>
               <PopoverContent>
                 <Command>
-                  <CommandInput placeholder="Search state..." />
+                  <CommandInput placeholder="Search city..." />
                   <CommandEmpty>No city found.</CommandEmpty>
 
                   <CommandGroup>
@@ -147,9 +164,9 @@ const SearchBar = () => {
             </Popover>
 
           </div>
-          <div>
-            <Input type="number" placeholder="ZIP Code" />
-          </div>
+          {/* <div>
+            <Input type="number" placeholder="ZIP Code" value={zipCode} onChange={(e)=>setZipCode(e.target.value)} />
+          </div> */}
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -176,7 +193,11 @@ const SearchBar = () => {
             </PopoverContent>
           </Popover>
         </div>
-        <Button className="bg-clr_primary rounded-lg px-5 w-[213px]">Search</Button>
+        <Button className="bg-clr_primary rounded-lg px-5 w-[213px]" asChild>
+          <Link href={"/search-events"+link}>
+            Search
+          </Link>
+        </Button>
       </div>
     </div>
   )

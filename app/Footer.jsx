@@ -18,7 +18,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="w-full left-0 h-7 top-[338px] absolute">
-        <p className='w-full bg-orange-5400'>© 2024 Satsang Seva</p>
+        <p className='w-full text-center bg-clr_primary bg-orange-5400'>© 2024 Satsang Seva</p>
       </div>
       <div className="w-[364px] h-[174.79px] left-[980px] top-[70px] absolute">
         <div className="w-[364px] left-0 top-[33px] absolute text-center text-zinc-100 text-sm   leading-snug">Join our mailing list to stay in the loop with our newest for Events</div>
