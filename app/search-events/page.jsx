@@ -1,4 +1,5 @@
 "use client"
+import Navbar from '@/components/Navbar/Navbar';
 import { toast } from '@/components/ui/use-toast';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation'
@@ -45,8 +46,10 @@ const Page = () => {
     fetchEvents();
   },[])
 
+  
   return (
     <div>
+      <Navbar />
       <p>Artist: {artist}</p>
       <p>Event: {event}</p>
       <p>City: {city}</p>

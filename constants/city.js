@@ -1367,7 +1367,6 @@ const allCity = {
       "Srirampore",
       "Adra"
     ]
-
   },
 }
 
