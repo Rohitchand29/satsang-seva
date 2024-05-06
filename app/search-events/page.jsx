@@ -4,12 +4,11 @@ import Navbar from '@/components/Navbar/Navbar';
 import { toast } from '@/components/ui/use-toast';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 
-const Page = () => {
-
+const Wrapped = () => {
   const [events, setEvents] = useState([])
-  
+
   const searchParams = useSearchParams();
   const artist = searchParams.get("artist");
   const event = searchParams.get("event");
@@ -19,8 +18,8 @@ const Page = () => {
   const lat = searchParams.get("lat");
 
   const payload = new Object();
-  payload["lon"] =lon
-  payload["lat"] =lat
+  payload["lon"] = lon
+  payload["lat"] = lat
   if (artist) {
     payload["event_performer"] = artist;
   }
@@ -50,26 +49,32 @@ const Page = () => {
       })
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
     fetchEvents();
-  },[])
+  }, [])
 
-  
-  return (events)?<div>
+
+  return (events) ? <Suspense><div>
     {
       events.map((pick, index) => {
         return (
-          <EventCard key={index} title={pick.title} location={pick.location.coordinates} start={pick.start} end={pick.end} img={pick.image} calculatedDistance={Math.floor(pick.calculatedDistance/1000)} _id={pick._id} attendies={pick.peopleAttending.length} location_name={pick.location_name} location_url={pick.location_url} host_name={pick.host_name} event_type={pick.event_type} event_performer={pick.event_performer} />
+          <EventCard key={index} title={pick.title} location={pick.location.coordinates} start={pick.start} end={pick.end} img={pick.image} calculatedDistance={Math.floor(pick.calculatedDistance / 1000)} _id={pick._id} attendies={pick.peopleAttending.length} location_name={pick.location_name} location_url={pick.location_url} host_name={pick.host_name} event_type={pick.event_type} event_performer={pick.event_performer} />
         )
       })
     }
-  </div>:(
-    <div>
+  </div></Suspense> : (
+    <Suspense><div>
       <p>Artist: {artist}</p>
       <p>Event: {event}</p>
       <p>City: {city}</p>
       <p>Date: {date}</p>
-    </div>
+    </div></Suspense>
+  )
+}
+
+const Page = () => {
+  return (
+    <Suspense><Wrapped /></Suspense>
   )
 }
 
