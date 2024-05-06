@@ -51,6 +51,9 @@ const eventSchema = new mongoose.Schema({
     event_type: {
       type: String,
     },
+    event_group: {
+      type: String,
+    },
     host_name: {
       type: String,
     },
@@ -59,6 +62,9 @@ const eventSchema = new mongoose.Schema({
     },
     host_email: {
       type: String,
+    },
+    city: {
+        type: String,
     },
     event_visibility: {
         type: String,

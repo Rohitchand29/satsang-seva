@@ -87,28 +87,28 @@ const Navbar = () => {
         <div className='flex gap-3'>
           {
             (!user) ?
-              // <Popover>
-              //   <Button className="bg-clr_primary rounded-full px-5 h-[33px]" asChild>
-              //     <PopoverTrigger>
-              //       Log In
-              //     </PopoverTrigger>
-              //   </Button>
-              //   <PopoverContent className="p-0 me-28">
-              //     <Login />
-              //   </PopoverContent>
-              // </Popover> :
-              // <Button className="bg-clr_primary rounded-full px-5 h-[33px]" onClick={handleLogout}>Log Out</Button>
-              <Dialog>
+              <Popover>
                 <Button className="bg-clr_primary rounded-full px-5 h-[33px]" asChild>
-                  <DialogTrigger>
+                  <PopoverTrigger>
                     Log In
-                  </DialogTrigger>
+                  </PopoverTrigger>
                 </Button>
-                <DialogContent className=' absolute z-10 w-72 translate-x-[-50%] top-[5%] left-[50%]'>
+                <PopoverContent className="p-0 me-28">
                   <Login />
-                </DialogContent>
-              </Dialog>:
+                </PopoverContent>
+              </Popover> :
               <Button className="bg-clr_primary rounded-full px-5 h-[33px]" onClick={handleLogout}>Log Out</Button>
+              // <Dialog>
+              //   <Button className="bg-clr_primary rounded-full px-5 h-[33px]" asChild>
+              //     <DialogTrigger>
+              //       Log In
+              //     </DialogTrigger>
+              //   </Button>
+              //   <DialogContent className=' absolute z-10 w-72 translate-x-[-50%] top-[5%] left-[50%]'>
+              //     <Login />
+              //   </DialogContent>
+              // </Dialog>:
+              // <Button className="bg-clr_primary rounded-full px-5 h-[33px]" onClick={handleLogout}>Log Out</Button>
           }
         </div>
       </div>

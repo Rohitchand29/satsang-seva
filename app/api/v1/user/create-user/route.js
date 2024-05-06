@@ -14,8 +14,8 @@ export async function POST(request) {
 
     if (!user) {
       const newUser = new USER({
-        firstName: "Anurag",
-        lastName: "Daksh",
+        firstName: "",
+        lastName: "",
         email: data.email,
         phone: data.phone,
         firebase_uid: data.uid
